@@ -414,13 +414,16 @@ export default function Page() {
         <div className="amount-wrap">
           <input
             className="amount-input"
-            type="number"
+            type="text"
             inputMode="decimal"
             placeholder="0"
             value={logAmount}
-            onChange={(e) => setLogAmount(e.target.value)}
+            onChange={(e) =>
+              setLogAmount(
+                e.target.value.replace(/[^0-9.,]/g, "").replace(/,/g, ".")
+              )
+            }
             onKeyDown={(e) => e.key === "Enter" && submitLog()}
-            min="0"
           />
           <span className="amount-unit-label">
             {logType === "pages" ? "pages" : "km"}
